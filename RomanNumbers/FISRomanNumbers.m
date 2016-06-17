@@ -14,7 +14,14 @@
     self = [super init];
     return self;
 }
+    // PUBLIC METHOD // convertation number into Roman number
+- (NSString *)convertNumberToRomanNumber:(NSUInteger)number {
+    NSArray *arrayDigits = [self ConvertNumberToArrayOfDigits:number];
+    NSString *convertNumber = [self convertArrayOfDigitsToRomanNumber:arrayDigits];
+    return convertNumber;
 
+}
+    // splite number into single digits
 - (NSArray *)ConvertNumberToArrayOfDigits:(NSUInteger)number {
     NSMutableArray *result = [[NSMutableArray alloc] init];
     while (number > 0) {
@@ -23,88 +30,50 @@
     }
     return result;
 }
-
+    // convert each digit of ariginal numer itno Roman style
 - (NSString *)convertArrayOfDigitsToRomanNumber:(NSArray *)arrayDigits {
     NSString *result = @"";
-    NSUInteger firstDigit = [arrayDigits[0] integerValue];
-    NSUInteger secondDigit = [arrayDigits[1] integerValue];
-    NSUInteger thirdDigit = [arrayDigits[2] integerValue];
-    
-    
-    
-    if(thirdDigit == 9){
-        result = [result stringByAppendingString:@"CM"];
-    } else if (thirdDigit < 4) {
-        while (thirdDigit > 0) {
-            result = [result stringByAppendingString:@"C"];
-            thirdDigit--;
+
+    if([arrayDigits count] > 2) {
+        NSUInteger firstDigit = [arrayDigits[2] integerValue];
+        NSString *firstResult = [self convertDigit:firstDigit ToRoman:@[@"C", @"D", @"CM"]];
+        result = [result stringByAppendingString:firstResult];
+    }
+    if([arrayDigits count] > 1) {
+        NSUInteger secondDigit = [arrayDigits[1] integerValue];
+        NSString *secondResult = [self convertDigit:secondDigit ToRoman:@[@"X", @"L", @"XC"]];
+        result = [result stringByAppendingString:secondResult];
+    }
+    if([arrayDigits count] > 0) {
+        NSUInteger thirdDigit = [arrayDigits[0] integerValue];
+        NSString *thirdResult = [self convertDigit:thirdDigit ToRoman:@[@"I", @"V", @"IX"]];
+        result = [result stringByAppendingString:thirdResult];
+    }
+
+    return result;
+}
+    // "drawing" the current digit into Roman style
+- (NSString *)convertDigit:(NSUInteger)digit ToRoman:(NSArray *)letter {
+    NSString *result = @"";
+    if(digit == 9){
+        result = [result stringByAppendingString:letter[2]];
+    } else if (digit < 4) {
+        while (digit > 0) {
+            result = [result stringByAppendingString:letter[0]];
+            digit--;
         }
     } else {
-        result = [result stringByAppendingString:@"D"];
-        if(thirdDigit < 5){
-            result = [@"C" stringByAppendingString:result];
+        result = [result stringByAppendingString:letter[1]];
+        if(digit < 5){
+            result = [letter[0] stringByAppendingString:result];
         } else {
-            while (thirdDigit > 5) {
-                result = [result stringByAppendingString:@"C"];
-                thirdDigit--;
+            while (digit > 5) {
+                result = [result stringByAppendingString:letter[0]];
+                digit--;
             }
         }
         
     }
-    
-    
-    
-    
-    
-    
-    if(secondDigit == 9){
-        result = [result stringByAppendingString:@"XC"];
-    } else if (secondDigit < 4) {
-        while (secondDigit > 0) {
-            result = [result stringByAppendingString:@"X"];
-            secondDigit--;
-        }
-    } else {
-        result = [result stringByAppendingString:@"L"];
-        if(secondDigit < 5){
-            result = [@"X" stringByAppendingString:result];
-        } else {
-            while (secondDigit > 5) {
-                result = [result stringByAppendingString:@"X"];
-                secondDigit--;
-            }
-        }
-        
-    }
-    
-    
-    
-    
-    if(firstDigit == 9){
-        result = [result stringByAppendingString:@"IX"];
-    } else if (firstDigit < 4) {
-        while (firstDigit > 0) {
-            result = [result stringByAppendingString:@"I"];
-            firstDigit--;
-        }
-    } else {
-        result = [result stringByAppendingString:@"V"];
-        if(firstDigit < 5){
-            result = [@"I" stringByAppendingString:result];
-        } else {
-            while (firstDigit > 5) {
-                result = [result stringByAppendingString:@"I"];
-                firstDigit--;
-            }
-        }
-    
-    }
-    
-    
-    
-    
-    
-    
     return result;
 }
 

@@ -11,7 +11,6 @@
 @interface FISRomanNumbers : NSObject
 
 - (instancetype)init;
-- (NSArray *)ConvertNumberToArrayOfDigits:(NSUInteger)number;
-- (NSString *)convertArrayOfDigitsToRomanNumber:(NSArray *)array;
+- (NSString *)convertNumberToRomanNumber:(NSUInteger)number;
 
 @end

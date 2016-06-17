@@ -20,12 +20,8 @@
     // Override point for customization after application launch.
     
     FISRomanNumbers *myNumber = [[FISRomanNumbers alloc] init];
-    NSArray *arrayOfDigits = [myNumber ConvertNumberToArrayOfDigits:478];
-    NSLog(@"%@", [myNumber convertArrayOfDigitsToRomanNumber:arrayOfDigits]);
-    
-    
-    
-    
+    NSString *result = [myNumber convertNumberToRomanNumber:37];
+    NSLog(@"%@", result);
     
     return YES;
 }
