@@ -19,9 +19,9 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
     
-    FISRomanNumbers *myNumber = [[FISRomanNumbers alloc] init];
-    NSString *result = [myNumber convertNumberToRomanNumber:37];
-    NSLog(@"%@", result);
+//    FISRomanNumbers *myNumber = [[FISRomanNumbers alloc] init];
+//    NSString *result = [myNumber convertNumberToRomanNumber:37];
+//    NSLog(@"%@", result);
     
     return YES;
 }

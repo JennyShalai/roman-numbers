@@ -33,7 +33,10 @@
     // convert each digit of ariginal numer itno Roman style
 - (NSString *)convertArrayOfDigitsToRomanNumber:(NSArray *)arrayDigits {
     NSString *result = @"";
-
+    
+    if([arrayDigits count] > 3) {
+        result = [result stringByAppendingString:@"M"];
+    }
     if([arrayDigits count] > 2) {
         NSUInteger firstDigit = [arrayDigits[2] integerValue];
         NSString *firstResult = [self convertDigit:firstDigit ToRoman:@[@"C", @"D", @"CM"]];
